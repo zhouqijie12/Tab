@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+*{margin:0; padding:0;}
+input.on{background:red; color:#fff;}
+div{width:100px; height:100px; background:red; color:#fff; padding:20px; display:none;}
+</style>
+</head>
+
+<body>
+<input type="button" value="11111111" class="on"/>
+<input type="button" value="222222222" />
+<input type="button" value="33333333" />
+<div style="display:block">111111</div>
+<div>22222</div>
+<div>333333333</div>
+
+<script>
+//面向过程
+/*window.onload = function(){
+	var aInput = document.getElementsByTagName('input');
+	var aDiv = document.getElementsByTagName('div');
+	
+	for(var i=0;i<aInput.length;i++){
+		aInput[i].index = i;
+		aInput[i].onclick = function(){
+			for(var i=0;i<aInput.length;i++){
+				aInput[i].className = "";
+				aDiv[i].style.display = "none";
+			}
+			this.className = "on";
+			aDiv[this.index].style.display="block";
+		}
+	}
+}*/
+
+//面向对象
+function Tab(aInput,aDiv){
+	this.init(aInput,aDiv);
+};
+
+Tab.prototype = {
+	init:function(aInput,aDiv){
+		this.aInput = document.getElementsByTagName(aInput);
+		this.aDiv = document.getElementsByTagName(aDiv);
+		
+		var _this = this;
+		for(var i=0;i<this.aInput.length;i++){
+			this.aInput[i].index = i;
+			this.aInput[i].onclick = function(){
+				_this.tab(this);
+			}
+		}
+	},
+	tab:function(ipt){
+		for(var i=0;i<this.aInput.length;i++){
+			this.aInput[i].className = "";
+			this.aDiv[i].style.display = "none";
+		}
+		ipt.className = "on";
+		this.aDiv[ipt.index].style.display="block";
+	}
+	
+	
+}
+new Tab('input','div');
+</script>
+</body>
+</html>
